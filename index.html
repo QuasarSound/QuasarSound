@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniSpeaker Buds - QuasaSounds | Som Premium no Tamanho da Sua Mão</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000;
+            --accent: #ff6b35;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            width: 120px;
+            filter: brightness(0) invert(1);
+        }
+
+        .cta-header {
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .cta-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+            color: white;
+            padding: 150px 5% 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,107,53,0.2) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-image {
+            max-width: 500px;
+            margin: 3rem auto;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .price-tag {
+            background: var(--accent);
+            color: white;
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 2rem;
+            animation: pulse 2s ease infinite;
+        }
+
+        .price-tag .old-price {
+            text-decoration: line-through;
+            opacity: 0.7;
+            font-size: 1.5rem;
+        }
+
+        .price-tag .new-price {
+            font-size: 3.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .price-tag .discount {
+            background: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-dark {
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 900;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-bottom: 4rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .spec-item {
+            background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .spec-item strong {
+            display: block;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c61 100%);
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: #000;
+            color: white;
+            padding: 1.5rem 4rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .guarantee {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .guarantee-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .guarantee-icon {
+            font-size: 2.5rem;
+        }
+
+        .footer {
+            background: #000;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .countdown {
+            background: rgba(0,0,0,0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .countdown strong {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .guarantee {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .urgency-banner {
+            background: #ff6b35;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="urgency-banner">
+        🔥 OFERTA RELÂMPAGO: 50% OFF + FRETE GRÁTIS - ÚLTIMAS UNIDADES! 🔥
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Ctext x='20' y='150' font-family='Arial' font-size='80' font-weight='bold'%3EQS%3C/text%3E%3Ctext x='20' y='200' font-family='Arial' font-size='20'%3EQUASASOUND%3C/text%3E%3C/svg%3E" alt="QuasaSounds" class="logo">
+            <button class="cta-header" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">
+                COMPRAR AGORA
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>MiniSpeaker Buds</h1>
+        <p>Som gigante. Tamanho compacto. Experiência incomparável.</p>
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Ccircle cx='200' cy='200' r='180' fill='%23333'/%3E%3Ccircle cx='200' cy='200' r='150' fill='%23111'/%3E%3Cpath d='M 200 50 Q 350 200 200 350 Q 50 200 200 50' fill='none' stroke='%23666' stroke-width='2'/%3E%3C/svg%3E" alt="MiniSpeaker Buds" class="hero-image">
+        
+        <div class="price-tag">
+            <span class="old-price">De R$ 299,90</span>
+            <span class="new-price">R$ 149,90</span>
+            <div class="discount">ECONOMIZE 50%</div>
+        </div>
+        
+        <div class="countdown">
+            ⏰ Oferta termina em: <strong id="timer">23:59:47</strong>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Por que o MiniSpeaker Buds?</h2>
+        <p class="section-subtitle">Tecnologia de ponta em um design elegante e portátil</p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <h3>Graves Profundos</h3>
+                <p>Tecnologia de amplificação de baixo que entrega graves potentes e definidos, mesmo em um corpo compacto.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔋</div>
+                <h3>12h de Bateria</h3>
+                <p>Bateria de longa duração que garante até 12 horas de reprodução contínua. Perfeito para o dia todo.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💧</div>
+                <h3>À Prova D'água</h3>
+                <p>Certificação IPX7 - resiste a respingos, chuva e até imersão em água. Leve para piscina, praia, qualquer lugar!</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Bluetooth 5.0</h3>
+                <p>Conexão instantânea e estável até 10 metros de distância. Compatível com todos os dispositivos.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎤</div>
+                <h3>Microfone Integrado</h3>
+                <p>Atenda chamadas com clareza cristalina. Perfeito para conferências e conversas sem tirar o celular do bolso.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Design Premium</h3>
+                <p>Acabamento sofisticado com textura em espiral hipnótica. Um objeto de desejo que cabe na sua mão.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <h2 class="section-title">Especificações Técnicas</h2>
+        <p class="section-subtitle">Performance profissional em cada detalhe</p>
+        
+        <div class="specs">
+            <div class="spec-item">
+                <strong>10W</strong>
+                <p>Potência de Saída</p>
+            </div>
+            <div class="spec-item">
+                <strong>360°</strong>
+                <p>Som Surround</p>
+            </div>
+            <div class="spec-item">
+                <strong>12h</strong>
+                <p>Bateria</p>
+            </div>
+            <div class="spec-item">
+                <strong>IPX7</strong>
+                <p>Resistente à Água</p>
+            </div>
+            <div class="spec-item">
+                <strong>Bluetooth 5.0</strong>
+                <p>Conexão Rápida</p>
+            </div>
+            <div class="spec-item">
+                <strong>150g</strong>
+                <p>Ultra Leve</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">O Que Nossos Clientes Dizem</h2>
+        <p class="section-subtitle">Mais de 10.000 clientes satisfeitos em todo Brasil</p>
+        
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Não acreditei quando ouvi. O som é INCRÍVEL para o tamanho! Levei para a praia e funcionou perfeitamente. Comprei mais dois para dar de presente."</p>
+                <div class="testimonial-author">- Maria Silva, São Paulo</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Melhor compra do ano! Som potente, design lindo e a bateria dura muito mesmo. Uso todos os dias no escritório e em casa."</p>
+                <div class="testimonial-author">- João Pedro, Rio de Janeiro</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Qualidade premium por um preço justo. O grave é surpreendente! Já indiquei para toda família. QuasaSounds é Top!"</p>
+                <div class="testimonial-author">- Ana Costa, Belo Horizonte</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Garanta o Seu Agora!</h2>
+        <p>Oferta exclusiva por tempo limitado</p>
+        <button class="cta-button" onclick="alert('🎉 Redirecionando para o checkout seguro...\n\n✅ Frete Grátis\n✅ 50% de Desconto\n✅ Garantia de 30 dias\n✅ Pagamento 100% Seguro')">
+            QUERO MEU MINISPEAKER BUDS
+        </button>
+        
+        <div class="guarantee">
+            <div class="guarantee-item">
+                <span class="guarantee-icon">🚚</span>
+                <div>
+                    <strong>Frete Grátis</strong><br>
+                    Para todo Brasil
+                </div>
+            </div>
+            <div class="guarantee-item">
+                <span class="guarantee-icon">🔒</span>
+                <div>
+                    <strong>Compra Segura</strong><br>
+                    Pagamento Protegido
+                </div>
+            </div>
+            <div class="guarantee-item">
+                <span class="guarantee-icon">↩️</span>
+                <div>
+                    <strong>30 Dias de Garantia</strong><br>
+                    Devolução sem burocracia
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 QuasaSounds - Todos os direitos reservados</p>
+        <p style="margin-top: 1rem; opacity: 0.7;">CNPJ: 00.000.000/0001-00 | contato@quasasounds.com.br</p>
+    </footer>
+
+    <script>
+        let timeLeft = 86387;
+        
+        function updateTimer() {
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+            
+            document.getElementById('timer').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+            } else {
+                timeLeft = 86400;
+            }
+        }
+        
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.classList.contains('cta-button') || this.classList.contains('cta-header')) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255,255,255,0.6);
+                        width: 100px;
+                        height: 100px;
+                        left: ${e.clientX - rect.left - 50}px;
+                        top: ${e.clientY - rect.top - 50}px;
+                        animation: ripple 0.6s ease-out;
+                        pointer-events: none;
+                    `;
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                }
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
